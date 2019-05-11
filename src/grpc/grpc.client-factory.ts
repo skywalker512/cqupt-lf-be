@@ -4,7 +4,7 @@ import { join } from 'path';
 
 @Injectable()
 export class GrpcClientFactory {
-    @Client(generateGrpcOptions('localhost:50053', 'cqupt_user', 'user.proto'))
+    @Client(generateGrpcOptions('localhost:50053', 'cqupt_user', 'cqupt_user.proto'))
     public readonly userModuleClient: ClientGrpc;
 }
 
