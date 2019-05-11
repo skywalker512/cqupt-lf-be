@@ -1,18 +1,12 @@
 import { Entity, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, PrimaryColumn, OneToOne } from "typeorm"
 
-enum Status {
-  Lost = 'Lost',
-  Found = 'Found',
-  Null = 'Null',
-}
-
 @Entity()
 export class Card {
   @PrimaryColumn({ unique: true })
-  id: string
-
+  stuNum: string
+  // lost found unknown
   @Column()
-  status: Status
+  status: string
 
   @Column()
   LostTime: Date

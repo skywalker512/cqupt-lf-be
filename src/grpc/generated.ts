@@ -274,7 +274,7 @@ export namespace cqupt_user {
         name?: (string|null);
 
         /** Card stuId */
-        stuId?: (string|null);
+        stuId?: (number|null);
 
         /** Card createdAt */
         createdAt?: (string|null);
@@ -290,7 +290,7 @@ export namespace cqupt_user {
         stuNum?: (string|null);
 
         /** CreatCardReq stuId */
-        stuId?: (string|null);
+        stuId?: (number|null);
 
         /** CreatCardReq name */
         name?: (string|null);

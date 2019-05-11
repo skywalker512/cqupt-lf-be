@@ -1,11 +1,12 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module, Global } from '@nestjs/common';
 import { CardModule } from './card/card.module';
+import { GrpcClientFactory } from './grpc/grpc.client-factory';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
+@Global()
 @Module({
-  imports: [CardModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [TypeOrmModule.forRoot(), CardModule],
+  providers: [GrpcClientFactory],
+  exports: [GrpcClientFactory],
 })
 export class AppModule {}

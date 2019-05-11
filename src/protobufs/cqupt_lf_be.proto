@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package cqupt_lf_be;
+
+service CardController {
+  rpc CreatLostCard (CreatLostCardReq) returns (CardRes);
+  rpc FindCard (FindCardReq) returns (CardRes);
+}
+message Card {
+  string stuNum = 1;
+  string user = 2;
+  string name = 3;
+  int32 stuId = 4;
+  string createdAt = 5;
+  string updatedAt = 6;
+  string status = 7;
+  string LostTime = 8;
+  string foundTime = 9;
+}
+
+message CreatLostCardReq {
+  string stuNum = 1;
+  string name = 2;
+  string departmentId = 3;
+  int32 stuId = 4;
+  string userId = 5;
+}
+message CardRes {
+  int32 code = 1;
+  string message = 2;
+  Card card = 3;
+}
+
+message FindCardReq {
+  string stuNum = 1;
+}
