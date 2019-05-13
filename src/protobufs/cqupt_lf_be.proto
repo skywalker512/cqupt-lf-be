@@ -3,8 +3,8 @@ syntax = "proto3";
 package cqupt_lf_be;
 
 service CardController {
-  rpc CreatLostCard (CreatLostCardReq) returns (CardRes);
-  rpc FindCard (FindCardReq) returns (CardRes);
+  rpc CreatLostCard (CreatLostCardReq) returns (CreatLostCardRes);
+  rpc FindCard (FindCardReq) returns (FindCardRes);
 }
 message Card {
   string stuNum = 1;
@@ -25,7 +25,8 @@ message CreatLostCardReq {
   int32 stuId = 4;
   string userId = 5;
 }
-message CardRes {
+
+message CreatLostCardRes {
   int32 code = 1;
   string message = 2;
   Card card = 3;
@@ -33,4 +34,10 @@ message CardRes {
 
 message FindCardReq {
   string stuNum = 1;
+}
+
+message FindCardRes {
+  int32 code = 1;
+  string message = 2;
+  Card card = 3;
 }
