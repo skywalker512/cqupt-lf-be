@@ -15,8 +15,8 @@ export class CardController {
   }
 
   @GrpcMethod()
-  async findCard(payload: {stuNum: string }) {
+  async findCardStatus(payload: {stuNum: string }) {
     const { stuNum } = payload
-    return await this.cardService.findCard(stuNum)
+    return await this.cardService.findCardStatus(stuNum)
   }
 }

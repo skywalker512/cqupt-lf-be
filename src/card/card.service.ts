@@ -36,9 +36,9 @@ export class CardService {
     }
   }
 
-  async findCard(stuNum: string ) {
+  async findCardStatus (stuNum: string ) {
     let card = await this.cardRepo.findOne({ where: { stuNum } })
-    const { code, card: remoteCard } = await this.cardService.findOneCard({ type: 'stuNum', data: { stuNum } }).toPromise()
+    const { code, card: remoteCard } = await this.cardService.findOneCard({ data: {  } }).toPromise()
     if ( card ) {
       if ( code === 200 ) {
         card = { ...card, ...remoteCard }
