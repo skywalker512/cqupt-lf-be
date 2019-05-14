@@ -345,7 +345,7 @@ export namespace cqupt_user {
         stuNum?: (string|null);
 
         /** CreatCardReq stuId */
-        stuId?: (number|null);
+        stuId?: (string|null);
 
         /** CreatCardReq name */
         name?: (string|null);

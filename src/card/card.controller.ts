@@ -9,7 +9,7 @@ export class CardController {
   ) { }
 
   @GrpcMethod()
-  async creatLostCard(payload: {stuNum: string, name: string, departmentId: string, stuId?: number, userId?: string}) {
+  async creatLostCard(payload: {stuNum: string, name: string, departmentId: string, stuId?: string, userId?: string}) {
     const { stuNum, name, departmentId, stuId, userId } = payload
     return await this.cardService.creatLostCard(stuNum, name, departmentId, stuId, userId)
   }

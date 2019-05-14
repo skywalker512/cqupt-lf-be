@@ -22,7 +22,7 @@ message CreatLostCardReq {
   string stuNum = 1;
   string name = 2;
   string departmentId = 3;
-  int32 stuId = 4;
+  string stuId = 4;
   string userId = 5;
 }
 
