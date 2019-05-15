@@ -24,22 +24,13 @@ export class CardService {
     try {
       const { code, card: remoteCard } = await this.cardService.creatCard({ stuNum, name, departmentId, stuId, userId }).toPromise()
       if (code === 200) {
-        let card = await this.cardRepo.findOne({ where: { stuNum } })
-        if (card) {
-          card = { ...remoteCard, ...card }
-          return this.judgeCardStatus(card)
-        } else {
-          card = await this.cardRepo.save(this.cardRepo.create({ stuNum, status: 'lost', LostTime: new Date(), foundTime: new Date() }))
-          card = { ...remoteCard, ...card }
-          return { code: 2004, message: '丢失卡片创建成功', card }
-        }
-      } else {
-        return { code: 500, message: '卡片创建失败' }
+        let card = await this.cardRepo.save(this.cardRepo.create({ stuNum, status: 'lost', LostTime: new Date(), foundTime: new Date() }))
+        card = { ...remoteCard, ...card }
+        return { code: 2004, message: '丢失卡片创建成功', card }
       }
     } catch (error) {
-      if ( error.code === 4001 ) throw new RpcException({ code: 404, message: '卡片已经存在' })
+      throw new RpcException(error)
     }
-
   }
 
   async findCardStatus(stuNum: string) {
@@ -58,7 +49,7 @@ export class CardService {
       }
       return { code: 404, message: '没有找到你的卡片' }
     } catch (error) {
-      if (error.code === 404) throw new RpcException({ code: 404, message: '卡片不存在' })
+      throw new RpcException(error)
     }
   }
 
