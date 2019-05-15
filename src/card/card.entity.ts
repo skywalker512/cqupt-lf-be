@@ -8,9 +8,9 @@ export class Card {
   @Column()
   status: string
 
-  @Column()
-  LostTime: Date
+  @Column({ nullable: true })
+  lostAt: Date
 
-  @Column()
-  foundTime: Date
+  @Column({ nullable: true })
+  foundAt: Date
 }

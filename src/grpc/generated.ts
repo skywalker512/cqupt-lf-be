@@ -107,9 +107,6 @@ export namespace cqupt_user {
 
         /** UserData updatedAt */
         updatedAt?: (string|null);
-
-        /** UserData card */
-        card?: (cqupt_user.Card|null);
     }
 
     /** Properties of a TokenInfo. */
@@ -140,9 +137,6 @@ export namespace cqupt_user {
 
         /** CreatUserRes user */
         user?: (cqupt_user.UserData|null);
-
-        /** CreatUserRes tokenInfo */
-        tokenInfo?: (cqupt_user.TokenInfo|null);
     }
 
     /** Properties of a LoginReq. */
@@ -373,8 +367,17 @@ export namespace cqupt_user {
     /** Properties of a FindOneCardReq. */
     export interface FindOneCardReq {
 
-        /** FindOneCardReq data */
-        data?: (cqupt_user.Card|null);
+        /** FindOneCardReq stuNum */
+        stuNum?: (string|null);
+
+        /** FindOneCardReq stuId */
+        stuId?: (string|null);
+
+        /** FindOneCardReq name */
+        name?: (string|null);
+
+        /** FindOneCardReq userId */
+        userId?: (string|null);
     }
 
     /** Properties of a FindOneCardRes. */
