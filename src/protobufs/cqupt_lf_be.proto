@@ -4,6 +4,7 @@ package cqupt_lf_be;
 
 service CardController {
   rpc FindCardStatus (FindCardStatusReq) returns (FindCardStatusRes);
+  rpc ChangeCardStatus (ChangeCardStatusReq) returns (ChangeCardStatusRes);
 }
 message CardWithStatus {
   string stuNum = 1;
@@ -20,6 +21,17 @@ message FindCardStatusReq {
 }
 
 message FindCardStatusRes {
+  int32 code = 1;
+  string message = 2;
+  CardWithStatus card = 3;
+}
+
+message ChangeCardStatusReq {
+  string stuNum = 1;
+  string status = 2;
+}
+
+message ChangeCardStatusRes {
   int32 code = 1;
   string message = 2;
   CardWithStatus card = 3;

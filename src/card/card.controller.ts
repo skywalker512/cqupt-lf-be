@@ -9,21 +9,16 @@ export class CardController {
     @Inject(CardService) private readonly cardService: CardService
   ) { }
 
-  // @GrpcMethod()
-  // async creatLostCard(payload: {stuNum: string, name: string, departmentId: string, stuId?: string, userId?: string}) {
-  //   const { stuNum, name, departmentId, stuId, userId } = payload
-  //   return await this.cardService.creatLostCard(stuNum, name, departmentId, stuId, userId)
-  // }
-
   @GrpcMethod()
   async findCardStatus(payload: { stuNum?: string, stuId?: string, name?: string, userId?: string}) {
-    let data: any
-    if(Object.keys(payload).includes('userId')) {
-      data = { user: payload.userId }
-    } else {
-      data = payload
-    }
-    const card = await this.cardService.findCardStatus(data)
+    const card = await this.cardService.findCardStatus(payload)
+    return this.judgeCardStatus(card)
+  }
+
+  @GrpcMethod()
+  async changeCardStatus(payload: {stuNum: string, status: string}) {
+    const { stuNum, status } = payload
+    const card = await this.cardService.changeCardStatus(stuNum, status)
     return this.judgeCardStatus(card)
   }
 

@@ -54,14 +54,14 @@ export class CardService {
   // }
 
   async checkLocalCard(stuNum: string) {
-    const card = await this.cardRepo.findOne(stuNum)
+    let card = await this.cardRepo.findOne(stuNum)
     if (!card) {
-      await this.cardRepo.save(this.cardRepo.create({ status: 'unknown', stuNum }))
+      card = await this.cardRepo.save(this.cardRepo.create({ status: 'unknown', stuNum }))
     }
     return card
   }
 
-  async findCardStatus(data: any) {
+  async findCardStatus(data: cqupt_user.FindOneCardReq) {
     // 在使用远程服务的时候必须包一个 try catch 以便于将错误传递到 公共网关
     try {
       const remoteCard = await this.cardService.findOneCard(data).toPromise()
@@ -70,5 +70,15 @@ export class CardService {
     } catch (error) {
       throw new RpcException(error)
     }
+  }
+
+  async changeCardStatus(stuNum: string, status: string) {
+    let card = await this.cardRepo.findOne(stuNum)
+    if (!card) throw new RpcException({ code: 404,  message: '没有找到你的卡片' })
+    if (status === 'lost') card.lostAt = new Date()
+    if (status === 'found') card.foundAt = new Date()
+    card.status = status
+    card = await this.cardRepo.save(card)
+    return card
   }
 }
