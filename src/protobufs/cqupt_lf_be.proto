@@ -11,6 +11,7 @@ message CardWithStatus {
   string status = 2;
   string lostAt = 3;
   string foundAt = 4;
+  Location foundLocation = 5;
 }
 
 message FindCardStatusReq {
@@ -29,10 +30,64 @@ message FindCardStatusRes {
 message ChangeCardStatusReq {
   string stuNum = 1;
   string status = 2;
+  string foundByUserId = 3;
+  string locationId = 4;
 }
 
 message ChangeCardStatusRes {
   int32 code = 1;
   string message = 2;
   CardWithStatus card = 3;
+}
+
+service LocationController {
+  rpc CreatLocation (CreatLocationReq) returns (CreatLocationRes);
+  rpc CreatLocationTag (CreatLocationTagReq) returns (CreatLocationTagRes);
+  rpc FindAllLocationWithTags (FindAllLocationWithTagsReq) returns (FindAllLocationWithTagsRes);
+}
+
+message Location {
+  string id = 1;
+  string name = 2;
+}
+
+message LocationTag {
+  string id = 1;
+  string name = 2;
+}
+
+message LocationWithTags {
+  string id = 1;
+  string name = 2;
+  repeated Location locations = 3;
+}
+
+message CreatLocationReq {
+  string name = 1;
+  string tagId = 2;
+}
+
+message CreatLocationRes {
+  int32 code = 1;
+  string message = 2;
+  Location location = 3;
+}
+
+message CreatLocationTagReq {
+  string name = 1;
+}
+
+message CreatLocationTagRes {
+  int32 code = 1;
+  string message = 2;
+  LocationTag locationTag = 3;
+}
+
+message FindAllLocationWithTagsReq {
+}
+
+message FindAllLocationWithTagsRes {
+  int32 code = 1;
+  string message = 2;
+  repeated LocationWithTags locationWithTags = 3;
 }

@@ -16,9 +16,9 @@ export class CardController {
   }
 
   @GrpcMethod()
-  async changeCardStatus(payload: {stuNum: string, status: string}) {
-    const { stuNum, status } = payload
-    const card = await this.cardService.changeCardStatus(stuNum, status)
+  async changeCardStatus(payload: {stuNum: string, status: string, foundByUserId?:string, locationId?: string}) {
+    const { stuNum, status, foundByUserId, locationId } = payload
+    const card = await this.cardService.changeCardStatus(stuNum, status, foundByUserId, locationId)
     return this.judgeCardStatus(card)
   }
 
