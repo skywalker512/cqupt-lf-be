@@ -4,10 +4,10 @@ import { join } from 'path';
 
 @Injectable()
 export class GrpcClientFactory {
-    @Client(generateGrpcOptions('localhost:50053', 'cqupt_user', 'cqupt_user.proto'))
+    @Client(generateGrpcOptions('cqupt-user:50053', 'cqupt_user', 'cqupt_user.proto'))
     public readonly userModuleClient: ClientGrpc;
     
-    @Client(generateGrpcOptions('localhost:50055', 'cqupt_api', 'cqupt_api.proto'))
+    @Client(generateGrpcOptions('cqupt-api:50055', 'cqupt_api', 'cqupt_api.proto'))
     public readonly apiModuleClient: ClientGrpc;
 }
 
