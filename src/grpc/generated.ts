@@ -1,5 +1,156 @@
 import * as grpc from 'grpc';
 import { Observable } from 'rxjs';
+/** Namespace cqupt_api. */
+export namespace cqupt_api {
+
+    /** Contains all the RPC service clients. */
+    export interface ClientFactory {
+
+        /**
+         * Returns the BaiduocrController service client.
+         */
+        getBaiduocrController(): cqupt_api.BaiduocrController;
+
+        /**
+         * Returns the QcloudsmsController service client.
+         */
+        getQcloudsmsController(): cqupt_api.QcloudsmsController;
+    }
+
+    /** Builder for an RPC service server. */
+    export interface ServerBuilder {
+
+        /**
+         * Adds a BaiduocrController service implementation.
+         * @param impl BaiduocrController service implementation
+         */
+        addBaiduocrController(impl: cqupt_api.BaiduocrController): cqupt_api.ServerBuilder;
+
+        /**
+         * Adds a QcloudsmsController service implementation.
+         * @param impl QcloudsmsController service implementation
+         */
+        addQcloudsmsController(impl: cqupt_api.QcloudsmsController): cqupt_api.ServerBuilder;
+    }
+
+    /** Constructs a new BaiduocrController service. */
+    export interface BaiduocrController {
+
+        /**
+         * Calls GetOcrToken.
+         * @param request GetOcrTokenReq message or plain object
+         *  * @param metadata Optional metadata
+         * @returns Promise
+         */
+        getOcrToken(request: cqupt_api.GetOcrTokenReq, metadata?: grpc.Metadata): Observable<cqupt_api.GetOcrTokenRes>;
+    }
+
+    /** Properties of a GetOcrTokenReq. */
+    export interface GetOcrTokenReq {
+    }
+
+    /** Properties of a GetOcrTokenRes. */
+    export interface GetOcrTokenRes {
+
+        /** GetOcrTokenRes code */
+        code?: (number|null);
+
+        /** GetOcrTokenRes message */
+        message?: (string|null);
+
+        /** GetOcrTokenRes accessToken */
+        accessToken?: (string|null);
+    }
+
+    /** Constructs a new QcloudsmsController service. */
+    export interface QcloudsmsController {
+
+        /**
+         * Calls SendVerifyCode.
+         * @param request SendVerifyCodeReq message or plain object
+         *  * @param metadata Optional metadata
+         * @returns Promise
+         */
+        sendVerifyCode(request: cqupt_api.SendVerifyCodeReq, metadata?: grpc.Metadata): Observable<cqupt_api.SendVerifyCodeRes>;
+
+        /**
+         * Calls ValidateCode.
+         * @param request ValidateCodeReq message or plain object
+         *  * @param metadata Optional metadata
+         * @returns Promise
+         */
+        validateCode(request: cqupt_api.ValidateCodeReq, metadata?: grpc.Metadata): Observable<cqupt_api.ValidateCodeRes>;
+
+        /**
+         * Calls SendFoundCardNotice.
+         * @param request SendFoundCardNoticeReq message or plain object
+         *  * @param metadata Optional metadata
+         * @returns Promise
+         */
+        sendFoundCardNotice(request: cqupt_api.SendFoundCardNoticeReq, metadata?: grpc.Metadata): Observable<cqupt_api.SendFoundCardNoticeRes>;
+    }
+
+    /** Properties of a SendVerifyCodeReq. */
+    export interface SendVerifyCodeReq {
+
+        /** SendVerifyCodeReq mobile */
+        mobile?: (string|null);
+    }
+
+    /** Properties of a SendVerifyCodeRes. */
+    export interface SendVerifyCodeRes {
+
+        /** SendVerifyCodeRes code */
+        code?: (number|null);
+
+        /** SendVerifyCodeRes message */
+        message?: (string|null);
+    }
+
+    /** Properties of a ValidateCodeReq. */
+    export interface ValidateCodeReq {
+
+        /** ValidateCodeReq mobile */
+        mobile?: (string|null);
+
+        /** ValidateCodeReq code */
+        code?: (string|null);
+    }
+
+    /** Properties of a ValidateCodeRes. */
+    export interface ValidateCodeRes {
+
+        /** ValidateCodeRes code */
+        code?: (number|null);
+
+        /** ValidateCodeRes message */
+        message?: (string|null);
+    }
+
+    /** Properties of a SendFoundCardNoticeReq. */
+    export interface SendFoundCardNoticeReq {
+
+        /** SendFoundCardNoticeReq mobile */
+        mobile?: (string|null);
+
+        /** SendFoundCardNoticeReq stuNum */
+        stuNum?: (string|null);
+
+        /** SendFoundCardNoticeReq locationName */
+        locationName?: (string|null);
+    }
+
+    /** Properties of a SendFoundCardNoticeRes. */
+    export interface SendFoundCardNoticeRes {
+
+        /** SendFoundCardNoticeRes code */
+        code?: (number|null);
+
+        /** SendFoundCardNoticeRes message */
+        message?: (string|null);
+    }
+}
+
 /** Namespace cqupt_user. */
 export namespace cqupt_user {
 
@@ -62,6 +213,14 @@ export namespace cqupt_user {
          * @returns Promise
          */
         login(request: cqupt_user.LoginReq, metadata?: grpc.Metadata): Observable<cqupt_user.LoginRes>;
+
+        /**
+         * Calls SuperAdminLogin.
+         * @param request SuperAdminLoginReq message or plain object
+         *  * @param metadata Optional metadata
+         * @returns Promise
+         */
+        superAdminLogin(request: cqupt_user.SuperAdminLoginReq, metadata?: grpc.Metadata): Observable<cqupt_user.SuperAdminLoginRes>;
 
         /**
          * Calls FindOneUser.
@@ -162,6 +321,32 @@ export namespace cqupt_user {
         user?: (cqupt_user.UserData|null);
 
         /** LoginRes tokenInfo */
+        tokenInfo?: (cqupt_user.TokenInfo|null);
+    }
+
+    /** Properties of a SuperAdminLoginReq. */
+    export interface SuperAdminLoginReq {
+
+        /** SuperAdminLoginReq data */
+        data?: (cqupt_user.UserData|null);
+
+        /** SuperAdminLoginReq code */
+        code?: (string|null);
+    }
+
+    /** Properties of a SuperAdminLoginRes. */
+    export interface SuperAdminLoginRes {
+
+        /** SuperAdminLoginRes code */
+        code?: (number|null);
+
+        /** SuperAdminLoginRes message */
+        message?: (string|null);
+
+        /** SuperAdminLoginRes user */
+        user?: (cqupt_user.UserData|null);
+
+        /** SuperAdminLoginRes tokenInfo */
         tokenInfo?: (cqupt_user.TokenInfo|null);
     }
 

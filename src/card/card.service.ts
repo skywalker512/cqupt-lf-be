@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Card } from './card.entity';
 import { Repository } from 'typeorm';
-import { cqupt_user } from '../grpc/generated';
+import { cqupt_user, cqupt_api } from '../grpc/generated';
 import { GrpcClientFactory } from '../grpc/grpc.client-factory';
 import { RpcException } from '@nestjs/microservices';
 import { UserService } from 'src/user/user.service';
@@ -12,6 +12,7 @@ import { LocationService } from 'src/location/location.service';
 export class CardService {
   onModuleInit() {
     this.rpcCardService = this.grpcClientFactory.userModuleClient.getService('CardController')
+    this.rpcApiService = this.grpcClientFactory.apiModuleClient.getService('QcloudsmsController')
   }
 
   constructor(
@@ -21,6 +22,7 @@ export class CardService {
     @Inject(LocationService) private readonly locationService: LocationService,
   ) { }
   private rpcCardService: cqupt_user.CardController
+  private rpcApiService: cqupt_api.QcloudsmsController
 
   // async creatLostCard(stuNum: string, name: string, departmentId: string, stuId?: string, userId?: string) {
   //   try {
@@ -82,6 +84,10 @@ export class CardService {
       card.foundAt = new Date()
       card.foundBys.push(await this.userService.findOneUserOrCreate(foundByUserId))
       card.foundLocation = await this.locationService.findLocation(locationId)
+      const locationName = card.foundLocation.name
+      const rpcCard = await this.rpcCardService.findOneCard({ stuNum }).toPromise()
+      const mobile = rpcCard.card.user.mobile
+      await this.rpcApiService.sendFoundCardNotice({ stuNum, mobile, locationName }).toPromise()
     }
     card.status = status
     card = await this.cardRepo.save(card)

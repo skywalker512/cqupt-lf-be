@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package cqupt_api;
+
+service BaiduocrController {
+  rpc GetOcrToken (GetOcrTokenReq) returns (GetOcrTokenRes);
+}
+
+message GetOcrTokenReq {}
+
+message GetOcrTokenRes {
+  int32 code = 1;
+  string message = 2;
+  string accessToken = 3;
+}
+
+service QcloudsmsController {
+  rpc SendVerifyCode (SendVerifyCodeReq) returns (SendVerifyCodeRes);
+  rpc ValidateCode (ValidateCodeReq) returns (ValidateCodeRes);
+  rpc SendFoundCardNotice (SendFoundCardNoticeReq) returns (SendFoundCardNoticeRes);
+}
+
+message SendVerifyCodeReq {
+  string mobile = 1;
+}
+
+message SendVerifyCodeRes {
+  int32 code = 1;
+  string message = 2;
+}
+
+message ValidateCodeReq {
+  string mobile = 1;
+  string code = 2;
+}
+
+message ValidateCodeRes {
+  int32 code = 1;
+  string message = 2;
+}
+
+message SendFoundCardNoticeReq {
+  string mobile = 1;
+  string stuNum = 2;
+  string locationName = 3;
+}
+
+
+message SendFoundCardNoticeRes {
+  int32 code = 1;
+  string message = 2;
+}
