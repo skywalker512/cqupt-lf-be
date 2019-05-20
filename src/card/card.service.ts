@@ -78,7 +78,11 @@ export class CardService {
 
   async changeCardStatus(stuNum: string, status: string, foundByUserId: string, locationId: string) {
     let card = await this.cardRepo.findOne(stuNum, { relations: ['foundBys', 'foundLocation'] })
-    if (!card) throw new RpcException({ code: 404,  message: '没有找到你的卡片' })
+    // if (!card) throw new RpcException({ code: 404,  message: '没有找到你的卡片' })
+
+    if (!card) {
+      card = await this.cardRepo.save(this.cardRepo.create({ status, stuNum }))
+    }
     if (status === 'lost') card.lostAt = new Date()
     if (status === 'found') {
       card.foundAt = new Date()
