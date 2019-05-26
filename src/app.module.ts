@@ -4,6 +4,8 @@ import { GrpcClientFactory } from './grpc/grpc.client-factory';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LocationModule } from './location/location.module';
 import { UserModule } from './user/user.module';
+import { Card } from './card/card.entity';
+import { LocationTag, FoundLocation } from './location/location.entity';
 
 @Global()
 @Module({
@@ -14,7 +16,7 @@ import { UserModule } from './user/user.module';
     port: 5432,
     username: "postgres",
     database: "cqupt_lf",
-    entities: ["dist/**/*.entity{.ts,.js}"],
+    entities: [Card, LocationTag, FoundLocation],
     synchronize: true
   }), CardModule, LocationModule, UserModule],
   providers: [GrpcClientFactory],
