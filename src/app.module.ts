@@ -7,8 +7,17 @@ import { UserModule } from './user/user.module';
 
 @Global()
 @Module({
-  imports: [TypeOrmModule.forRoot(), CardModule, LocationModule, UserModule],
+  imports: [TypeOrmModule.forRoot({
+    keepConnectionAlive: true,
+    type: "postgres",
+    host: "postgres",
+    port: 5432,
+    username: "postgres",
+    database: "cqupt_lf",
+    entities: ["dist/**/*.entity{.ts,.js}"],
+    synchronize: true
+  }), CardModule, LocationModule, UserModule],
   providers: [GrpcClientFactory],
   exports: [GrpcClientFactory],
 })
-export class AppModule {}
+export class AppModule { }
