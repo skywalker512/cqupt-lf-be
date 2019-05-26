@@ -6,6 +6,7 @@ import { LocationModule } from './location/location.module';
 import { UserModule } from './user/user.module';
 import { Card } from './card/card.entity';
 import { LocationTag, FoundLocation } from './location/location.entity';
+import { User } from './user/user.entity';
 
 @Global()
 @Module({
@@ -16,7 +17,7 @@ import { LocationTag, FoundLocation } from './location/location.entity';
     port: 5432,
     username: "postgres",
     database: "cqupt_lf",
-    entities: [Card, LocationTag, FoundLocation],
+    entities: [Card, LocationTag, FoundLocation, User],
     synchronize: true
   }), CardModule, LocationModule, UserModule],
   providers: [GrpcClientFactory],
